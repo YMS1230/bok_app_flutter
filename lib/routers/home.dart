@@ -10,6 +10,8 @@ class HomeRouter extends StatefulWidget {
 class _HomeRouterState extends State<HomeRouter> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      decoration: const BoxDecoration(color: CupertinoColors.black),
+    );
   }
 }

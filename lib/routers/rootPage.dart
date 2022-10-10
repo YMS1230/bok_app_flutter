@@ -5,17 +5,19 @@ import 'package:bok_app_flutter/routers/mine.dart';
 import 'package:bok_app_flutter/routers/wallet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 import 'dart:io';
 import '../common/customFloatingButton.dart';
+import '../common/screen.dart';
 
-class Tabbar extends StatefulWidget {
-  const Tabbar({Key? key}) : super(key: key);
+class RootPage extends StatefulWidget {
+  const RootPage({Key? key}) : super(key: key);
 
   @override
-  State<Tabbar> createState() => _TabbarState();
+  State<RootPage> createState() => _RootPageState();
 }
 
-class _TabbarState extends State<Tabbar> {
+class _RootPageState extends State<RootPage> {
   int _currentIndex = 0;
   final List _children = [
     const HomeRouter(),
@@ -28,26 +30,23 @@ class _TabbarState extends State<Tabbar> {
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData mq = MediaQuery.of(context);
-    // 屏幕宽(注意是dp, 转换px 需要 screenWidth * pixelRatio)
-    double screenWidth = mq.size.width;
-    // 屏幕高(注意是dp)
-    double screenHeight = mq.size.height;
-    // 顶部状态栏, 随着刘海屏会增高
-    double statusBarHeight = mq.padding.top;
-    // 底部功能栏, 类似于iPhone XR 底部安全区域
-    double bottomBarHeight = mq.padding.bottom;
-
+    // 初始化Toast
+    ToastContext().init(context);
     return Scaffold(
         body: _children[_currentIndex],
         bottomNavigationBar: InkResponse(
           highlightColor: Colors.transparent,
           radius: 0.0,
           child: CupertinoTabBar(
+            backgroundColor: Colors.black,
             currentIndex: _currentIndex,
             onTap: (int index) {
               setState(() {
-                _currentIndex = index;
+                if (index!=2) {
+                  _currentIndex = index;
+                } else {
+                  Toast.show("加号点击", duration: 2, gravity: Toast.center);
+                }
               });
             },
             items: const [
@@ -64,7 +63,8 @@ class _TabbarState extends State<Tabbar> {
         ),
         floatingActionButtonLocation: FloatingButtonCustomLocation(
             FloatingActionButtonLocation.centerDocked,
-            offsetY: Platform.isIOS && bottomBarHeight > 0 ? 15 : -10,
-            offsetX: 0));
+            offsetY: Platform.isIOS && Screen.bottomBarHeight > 0 ? 15 : -10,
+            offsetX: 0)
+    );
   }
 }
