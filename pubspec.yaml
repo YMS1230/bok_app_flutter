@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.5
   json_model: ^1.0.0
   json_serializable: ^5.0.0
+  buttons_tabbar: ^1.3.6
 
 dev_dependencies:
   flutter_test:
