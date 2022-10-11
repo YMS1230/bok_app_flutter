@@ -30,17 +30,6 @@ class _RootPageState extends State<RootPage> {
   ];
   late final void Function() onTabTapped;
 
-  final itemNames = [
-    _Item('首页', 'images/tab/home_n.png', 'images/tab/home_h.png'),
-    _Item('成长墙', 'images/tab/wallet_n.png', 'images/tab/wallet_h.png'),
-    _Item('', 'images/tab/plus.png', 'images/tab/plus.png'),
-    _Item('已购', 'images/tab/message_n.png', 'images/tab/message_h.png'),
-    _Item('我的', 'images/tab/mine_n.png', 'images/tab/mine_h.png')
-  ];
-
-  late List<MyBarItem.BottomNavigationBarItem> itemList;
-
-
   @override
   Widget build(BuildContext context) {
     // 初始化Toast
@@ -56,42 +45,37 @@ class _RootPageState extends State<RootPage> {
           currentIndex: _currentIndex,
           onTap: (int index) {
             setState(() {
-              if (index != 2) {
-                _currentIndex = index;
-              } else {
-                Toast.show("加号点击", duration: 2, gravity: Toast.center);
-              }
+              _currentIndex = index;
             });
           },
           items: [
             BottomNavigationBarItem(
                 label: "Home",
                 icon: Image.asset("images/tab/home_n.png",
-                    width: 25, height: 25, fit: BoxFit.cover),
+                    width: 20, height: 20, fit: BoxFit.cover),
                 activeIcon: Image.asset("images/tab/home_h.png",
-                    width: 25, height: 25, fit: BoxFit.cover)),
+                    width: 20, height: 20, fit: BoxFit.cover)),
             BottomNavigationBarItem(
                 label: "Wallet",
                 icon: Image.asset("images/tab/wallet_n.png",
-                    width: 25, height: 25, fit: BoxFit.cover),
+                    width: 20, height: 20, fit: BoxFit.cover),
                 activeIcon: Image.asset("images/tab/wallet_h.png",
-                    width: 25, height: 25, fit: BoxFit.cover)),
+                    width: 20, height: 20, fit: BoxFit.cover)),
             BottomNavigationBarItem(
                 label: "",
-                icon:
-                    Image.asset("images/tab/plus.png", width: 0, height: 0)),
+                icon: Image.asset("images/tab/plus.png", width: 0, height: 0)),
             BottomNavigationBarItem(
                 label: "Message",
                 icon: Image.asset("images/tab/message_n.png",
-                    width: 25, height: 25, fit: BoxFit.cover),
+                    width: 20, height: 20, fit: BoxFit.cover),
                 activeIcon: Image.asset("images/tab/message_h.png",
-                    width: 25, height: 25, fit: BoxFit.cover)),
+                    width: 20, height: 20, fit: BoxFit.cover)),
             BottomNavigationBarItem(
               label: "Mine",
               icon: Image.asset("images/tab/mine_n.png",
-                  width: 25, height: 25, fit: BoxFit.cover),
+                  width: 20, height: 20, fit: BoxFit.cover),
               activeIcon: Image.asset("images/tab/mine_h.png",
-                  width: 25, height: 25, fit: BoxFit.cover),
+                  width: 20, height: 20, fit: BoxFit.cover),
             ),
           ],
         ),
@@ -109,13 +93,7 @@ class _RootPageState extends State<RootPage> {
           FloatingActionButtonLocation.centerDocked,
           offsetY: Platform.isIOS && Screen.bottomBarHeight > 0 ? 25 : -10,
           offsetX: 0),
-      floatingActionButtonAnimator: NoScalingAnimation(),
+      floatingActionButtonAnimator: ScalingCustomAnimation()
     );
   }
-}
-
-class _Item {
-  String name, activeIcon, normalIcon;
-
-  _Item(this.name, this.activeIcon, this.normalIcon);
 }

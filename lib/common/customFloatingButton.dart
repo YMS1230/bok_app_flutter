@@ -15,7 +15,7 @@ class FloatingButtonCustomLocation extends FloatingActionButtonLocation {
   }
 }
 
-class NoScalingAnimation extends FloatingActionButtonAnimator{
+class ScalingCustomAnimation extends FloatingActionButtonAnimator{
   late double _x;
   late double _y;
   @override
