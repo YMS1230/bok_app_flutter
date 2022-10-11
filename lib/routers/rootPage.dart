@@ -9,8 +9,6 @@ import 'package:toast/toast.dart';
 import 'dart:io';
 import '../common/customFloatingButton.dart';
 import '../common/screen.dart';
-import 'package:bok_app_flutter/common/customBottomNavigationBarItem.dart'
-    as MyBarItem;
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
