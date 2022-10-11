@@ -12,6 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
+      theme: ThemeData(
+        primaryColor: Colors.black,
+      ),
       home: const RootPage(),
     );
   }
