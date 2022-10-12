@@ -14,7 +14,7 @@ class HeaderHomePage extends StatelessWidget {
         Text(
           "Following",
           style: TextStyle(
-            color: white.withOpacity(0.7),
+            color: Colors.white.withOpacity(0.7),
             fontSize: 16,
           ),
         ),
@@ -24,7 +24,7 @@ class HeaderHomePage extends StatelessWidget {
         Text(
           "|",
           style: TextStyle(
-            color: white.withOpacity(0.3),
+            color: Colors.white.withOpacity(0.3),
             fontSize: 17,
           ),
         ),
@@ -34,7 +34,7 @@ class HeaderHomePage extends StatelessWidget {
         const Text(
           "For You",
           style: TextStyle(
-              color: white, fontSize: 17, fontWeight: FontWeight.w500),
+              color: Colors.white, fontSize: 17, fontWeight: FontWeight.w500),
         )
       ],
     );

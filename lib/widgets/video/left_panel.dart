@@ -28,14 +28,14 @@ class LeftPanel extends StatelessWidget {
           Text(
             name,
             style: const TextStyle(
-                color: white, fontWeight: FontWeight.bold, fontSize: 16),
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(
             height: 10,
           ),
           Text(
             caption,
-            style: const TextStyle(color: white),
+            style: const TextStyle(color: Colors.white),
           ),
           const SizedBox(
             height: 5,
@@ -44,13 +44,13 @@ class LeftPanel extends StatelessWidget {
             children: <Widget>[
               const Icon(
                 Icons.music_note,
-                color: white,
+                color: Colors.white,
                 size: 15,
               ),
               Flexible(
                 child: Text(
                   songName,
-                  style: const TextStyle(color: white, height: 1.5),
+                  style: const TextStyle(color: Colors.white, height: 1.5),
                 ),
               )
             ],

@@ -1,3 +1,5 @@
+import 'package:bok_app_flutter/common/http/http_utils.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:bok_app_flutter/common/colors.dart';
@@ -8,6 +10,8 @@ import 'package:toast/toast.dart';
 import 'package:video_player/video_player.dart';
 import 'package:bok_app_flutter/widgets/video/video.dart';
 
+import '../common/http/apis.dart';
+
 class HomeRouter extends StatefulWidget {
   const HomeRouter({super.key});
 
@@ -16,14 +20,31 @@ class HomeRouter extends StatefulWidget {
 }
 
 class HomeRouterState extends State<HomeRouter>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    postRequest().then((List value) {
+      var url = value[0]["tc_video_url"];
+      // print('返回数据： $url');
+      setState(() {
+        items = value;
+      });
+      if (kDebugMode) {
+        print('返回数据： $value');
+      }
+    });
+  }
 
-    _tabController = TabController(length: items.length, vsync: this);
+  Future<List> postRequest() async {
+    var dio = Dio();
+    var response =
+        await dio.post("https://api.bikbok.io/video/videolist", data: {});
+    // var result = response.data["data"].toString();
+    var result = response.data["data"];
+    return result;
   }
 
   @override
@@ -36,7 +57,13 @@ class HomeRouterState extends State<HomeRouter>
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
-    return getBody();
+
+    if (items.isNotEmpty) {
+      _tabController = TabController(length: items.length, vsync: this);
+      return getBody();
+    }   else {
+      return Container(decoration: const BoxDecoration(color: Colors.black));
+    }
   }
 
   Widget getBody() {
@@ -47,16 +74,16 @@ class HomeRouterState extends State<HomeRouter>
         controller: _tabController,
         children: List.generate(items.length, (index) {
           return VideoPlayerItem(
-            videoUrl: items[index]['videoUrl'],
+            videoUrl: items[index]['tc_video_url'].replaceAll('http://', 'https://'),
             size: size,
-            name: items[index]['name'],
-            caption: items[index]['caption'],
-            songName: items[index]['songName'],
-            profileImg: items[index]['profileImg'],
-            likes: items[index]['likes'],
-            comments: items[index]['comments'],
-            shares: items[index]['shares'],
-            albumImg: items[index]['albumImg'],
+            name: items[index]['name_pub'],
+            caption: 'china',
+            songName: items[index]['name_pub'],
+            profileImg: items[index]['headurl_pub'],
+            likes: items[index]['likenum'],
+            comments: items[index]['comentnum'],
+            shares: items[index]['sharenum'],
+            albumImg: items[index]['headurl_pub'],
           );
         }),
       ),
@@ -70,9 +97,9 @@ class VideoPlayerItem extends StatefulWidget {
   final String caption;
   final String songName;
   final String profileImg;
-  final String likes;
-  final String comments;
-  final String shares;
+  final int likes;
+  final int comments;
+  final int shares;
   final String albumImg;
   const VideoPlayerItem(
       {Key? key,
@@ -128,7 +155,7 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
         : Icon(
             Icons.play_arrow,
             size: 80,
-            color: white.withOpacity(0.5),
+            color: KColors.kMaterialBgColor.withOpacity(0.5),
           );
   }
 
@@ -152,13 +179,14 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                 Container(
                   height: widget.size.height,
                   width: widget.size.width,
-                  decoration: const BoxDecoration(color: black),
+                  decoration:
+                      const BoxDecoration(color: KColors.kNavBgDarkColor),
                   child: Stack(
                     children: <Widget>[
                       Center(
                         child: AspectRatio(
                           //设置视频的大小 宽高比。长宽比表示为宽高比。例如，16:9宽高比的值为16.0/9.0
-                          aspectRatio: 0.5,
+                          aspectRatio: 9 / 16.0,
                           //播放视频的组件
                           child: VideoPlayer(_videoController),
                         ),
@@ -178,33 +206,30 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                   width: widget.size.width,
                   child: Padding(
                     padding:
-                        const EdgeInsets.only(left: 15, top: 0, bottom: 30),
-                    child: SafeArea(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          const HeaderHomePage(),
-                          Expanded(
-                              child: Row(
-                            children: <Widget>[
-                              LeftPanel(
-                                size: widget.size,
-                                name: widget.name,
-                                caption: widget.caption,
-                                songName: widget.songName,
-                              ),
-                              RightPanel(
-                                size: widget.size,
-                                likes: widget.likes,
-                                comments: widget.comments,
-                                shares: widget.shares,
-                                profileImg: widget.profileImg,
-                                albumImg: widget.albumImg,
-                              )
-                            ],
-                          ))
-                        ],
-                      ),
+                        const EdgeInsets.only(left: 15, top: 0, bottom: 50),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        // const HeaderHomePage(),
+                        Expanded(
+                            child: Row(
+                          children: <Widget>[
+                            LeftPanel(
+                              size: widget.size,
+                              name: widget.name,
+                              caption: widget.caption,
+                              songName: widget.songName,
+                            ),
+                            RightPanel(
+                              size: const Size(20, 400),
+                              likes: widget.likes.toString(),
+                              comments: widget.comments.toString(),
+                              shares: widget.shares.toString(),
+                              profileImg: widget.profileImg,
+                            )
+                          ],
+                        ))
+                      ],
                     ),
                   ),
                 )
@@ -220,7 +245,6 @@ class RightPanel extends StatelessWidget {
   final String comments;
   final String shares;
   final String profileImg;
-  final String albumImg;
   const RightPanel({
     Key? key,
     required this.size,
@@ -228,7 +252,6 @@ class RightPanel extends StatelessWidget {
     required this.comments,
     required this.shares,
     required this.profileImg,
-    required this.albumImg,
   }) : super(key: key);
 
   final Size size;
@@ -241,7 +264,7 @@ class RightPanel extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              height: size.height * 0.35,
+              height: size.height * 0.25,
             ),
             Expanded(
                 child: Column(
@@ -251,7 +274,6 @@ class RightPanel extends StatelessWidget {
                 getIcons(Icons.favorite, likes, 35.0),
                 getIcons(Icons.comment, comments, 35.0),
                 getIcons(Icons.reply, shares, 35.0),
-                getAlbum(albumImg)
               ],
             ))
           ],
