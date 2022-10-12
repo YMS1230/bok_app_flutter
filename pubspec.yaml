@@ -41,6 +41,46 @@ dependencies:
   buttons_tabbar: ^1.3.6
   toast: ^0.3.0
   video_player: ^2.4.7
+  dio: ^4.0.6
+  dio_cookie_manager: ^2.0.0
+  connectivity_plus: ^2.3.9
+  provider: ^6.0.4
+  keyboard_actions: ^4.1.0
+  url_launcher: ^6.1.6
+  bot_toast: ^4.0.3
+  flustars_flutter3: ^3.0.0
+  qr_code_scanner: ^1.0.1
+  badges: ^2.0.3
+  flutter_picker: ^2.0.5
+  permission_handler: ^10.1.0
+  wechat_assets_picker: ^8.1.2
+  wechat_camera_picker: ^3.6.1
+  webview_flutter: ^3.0.4
+  date_format: ^2.0.7
+  package_info_plus: ^2.0.0
+  encrypt: ^5.0.1
+  cached_network_image: ^3.2.2
+  qr_flutter: ^4.0.0
+  barcode_scan2: ^4.2.1
+  flutter_screenutil: ^5.5.4
+  easy_refresh: ^3.0.4+2
+  photo_view: ^0.14.0
+  device_info_plus: ^6.0.0
+  jhtoast: ^1.2.0
+  fluro: ^2.0.3
+  azlistview: ^2.0.0
+  flutter_swiper_null_safety_flutter3: ^3.0.0
+  flutter_slidable: ^2.0.0
+  lpinyin: ^2.0.3
+  fluttertoast: ^8.0.9
+  flutter_echarts: ^2.4.0
+  graphic: ^0.10.7
+  charts_flutter: ^0.12.0
+  reorderables: ^0.5.0
+  flutter_easyrefresh: ^2.2.2
+  sticky_headers: ^0.3.0+2
+  percent_indicator: ^4.2.2
+  carousel_slider: ^4.1.1
 
 dev_dependencies:
   flutter_test:

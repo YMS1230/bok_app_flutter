@@ -1,4 +1,3 @@
-import 'package:bok_app_flutter/common/screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:bok_app_flutter/common/colors.dart';
@@ -8,8 +7,6 @@ import 'package:bok_app_flutter/widgets/video/left_panel.dart';
 import 'package:toast/toast.dart';
 import 'package:video_player/video_player.dart';
 import 'package:bok_app_flutter/widgets/video/video.dart';
-
-import '../widgets/video/video_player_background.dart';
 
 class HomeRouter extends StatefulWidget {
   const HomeRouter({super.key});
@@ -21,9 +18,9 @@ class HomeRouter extends StatefulWidget {
 class HomeRouterState extends State<HomeRouter>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _tabController = TabController(length: items.length, vsync: this);
@@ -79,16 +76,16 @@ class VideoPlayerItem extends StatefulWidget {
   final String albumImg;
   const VideoPlayerItem(
       {Key? key,
-        required this.size,
-        required this.name,
-        required this.caption,
-        required this.songName,
-        required this.profileImg,
-        required this.likes,
-        required this.comments,
-        required this.shares,
-        required this.albumImg,
-        required this.videoUrl})
+      required this.size,
+      required this.name,
+      required this.caption,
+      required this.songName,
+      required this.profileImg,
+      required this.likes,
+      required this.comments,
+      required this.shares,
+      required this.albumImg,
+      required this.videoUrl})
       : super(key: key);
 
   final Size size;
@@ -129,10 +126,10 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
     return _videoController.value.isPlaying && !isShowPlaying
         ? Container()
         : Icon(
-      Icons.play_arrow,
-      size: 80,
-      color: white.withOpacity(0.5),
-    );
+            Icons.play_arrow,
+            size: 80,
+            color: white.withOpacity(0.5),
+          );
   }
 
   @override
@@ -181,7 +178,7 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                   width: widget.size.width,
                   child: Padding(
                     padding:
-                    const EdgeInsets.only(left: 15, top: 0, bottom: 30),
+                        const EdgeInsets.only(left: 15, top: 0, bottom: 30),
                     child: SafeArea(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -189,23 +186,23 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                           const HeaderHomePage(),
                           Expanded(
                               child: Row(
-                                children: <Widget>[
-                                  LeftPanel(
-                                    size: widget.size,
-                                    name: widget.name,
-                                    caption: widget.caption,
-                                    songName: widget.songName,
-                                  ),
-                                  RightPanel(
-                                    size: widget.size,
-                                    likes: widget.likes,
-                                    comments: widget.comments,
-                                    shares: widget.shares,
-                                    profileImg: widget.profileImg,
-                                    albumImg: widget.albumImg,
-                                  )
-                                ],
-                              ))
+                            children: <Widget>[
+                              LeftPanel(
+                                size: widget.size,
+                                name: widget.name,
+                                caption: widget.caption,
+                                songName: widget.songName,
+                              ),
+                              RightPanel(
+                                size: widget.size,
+                                likes: widget.likes,
+                                comments: widget.comments,
+                                shares: widget.shares,
+                                profileImg: widget.profileImg,
+                                albumImg: widget.albumImg,
+                              )
+                            ],
+                          ))
                         ],
                       ),
                     ),
@@ -248,15 +245,15 @@ class RightPanel extends StatelessWidget {
             ),
             Expanded(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    getProfile(profileImg),
-                    getIcons(Icons.favorite, likes, 35.0),
-                    getIcons(Icons.comment, comments, 35.0),
-                    getIcons(Icons.reply, shares, 35.0),
-                    getAlbum(albumImg)
-                  ],
-                ))
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                getProfile(profileImg),
+                getIcons(Icons.favorite, likes, 35.0),
+                getIcons(Icons.comment, comments, 35.0),
+                getIcons(Icons.reply, shares, 35.0),
+                getAlbum(albumImg)
+              ],
+            ))
           ],
         ),
       ),

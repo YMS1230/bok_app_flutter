@@ -89,7 +89,7 @@ class _RootPageState extends State<RootPage> {
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButtonLocation: FloatingButtonCustomLocation(
           FloatingActionButtonLocation.centerDocked,
-          offsetY: Platform.isIOS && Screen.bottomBarHeight > 0 ? 25 : -10,
+          offsetY: Platform.isIOS && Screen.bottomBarHeight > 0 ? 25 : 25,
           offsetX: 0),
       floatingActionButtonAnimator: ScalingCustomAnimation()
     );
