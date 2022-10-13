@@ -4,13 +4,11 @@ import 'package:bok_app_flutter/common/colors.dart';
 class LeftPanel extends StatelessWidget {
   final String name;
   final String caption;
-  final String songName;
   const LeftPanel({
     Key? key,
     required this.size,
     required this.name,
     required this.caption,
-    required this.songName,
   }) : super(key: key);
 
   final Size size;
@@ -40,21 +38,6 @@ class LeftPanel extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Row(
-            children: <Widget>[
-              const Icon(
-                Icons.music_note,
-                color: Colors.white,
-                size: 15,
-              ),
-              Flexible(
-                child: Text(
-                  songName,
-                  style: const TextStyle(color: Colors.white, height: 1.5),
-                ),
-              )
-            ],
-          )
         ],
       ),
     );

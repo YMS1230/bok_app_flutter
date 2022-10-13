@@ -1,16 +1,13 @@
-import 'package:bok_app_flutter/common/http/http_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:bok_app_flutter/common/colors.dart';
-import 'package:bok_app_flutter/widgets/video/header_home_page.dart';
 import 'package:bok_app_flutter/widgets/video/column_social_icon.dart';
 import 'package:bok_app_flutter/widgets/video/left_panel.dart';
 import 'package:toast/toast.dart';
 import 'package:video_player/video_player.dart';
-import 'package:bok_app_flutter/widgets/video/video.dart';
 
-import '../common/http/apis.dart';
+import '../common/jh_common/widgets/progress_dialog.dart';
 
 class HomeRouter extends StatefulWidget {
   const HomeRouter({super.key});
@@ -20,8 +17,10 @@ class HomeRouter extends StatefulWidget {
 }
 
 class HomeRouterState extends State<HomeRouter>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late TabController _tabController;
+
+  var items = [];
 
   @override
   void initState() {
@@ -42,7 +41,6 @@ class HomeRouterState extends State<HomeRouter>
     var dio = Dio();
     var response =
         await dio.post("https://api.bikbok.io/video/videolist", data: {});
-    // var result = response.data["data"].toString();
     var result = response.data["data"];
     return result;
   }
@@ -56,13 +54,14 @@ class HomeRouterState extends State<HomeRouter>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     ToastContext().init(context);
 
     if (items.isNotEmpty) {
       _tabController = TabController(length: items.length, vsync: this);
       return getBody();
-    }   else {
-      return Container(decoration: const BoxDecoration(color: Colors.black));
+    } else {
+      return const ProgressDialog();
     }
   }
 
@@ -74,11 +73,12 @@ class HomeRouterState extends State<HomeRouter>
         controller: _tabController,
         children: List.generate(items.length, (index) {
           return VideoPlayerItem(
-            videoUrl: items[index]['tc_video_url'].replaceAll('http://', 'https://'),
+            videoUrl:
+                items[index]['tc_video_url'].replaceAll('http://', 'https://'),
             size: size,
             name: items[index]['name_pub'],
-            caption: 'china',
-            songName: items[index]['name_pub'],
+            caption: items[index]['desp'],
+            songName: '',
             profileImg: items[index]['headurl_pub'],
             likes: items[index]['likenum'],
             comments: items[index]['comentnum'],
@@ -89,6 +89,10 @@ class HomeRouterState extends State<HomeRouter>
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
 class VideoPlayerItem extends StatefulWidget {
@@ -132,9 +136,9 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
 
     _videoController = VideoPlayerController.network(widget.videoUrl)
       ..initialize().then((value) {
-        _videoController.play();
+        // _videoController.play();
         setState(() {
-          isShowPlaying = false;
+          // isShowPlaying = false;
         });
       });
 
@@ -171,7 +175,8 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
       },
       child: RotatedBox(
         quarterTurns: -1,
-        child: SizedBox(
+        child: Container(
+            decoration: const BoxDecoration(color: Colors.black),
             height: widget.size.height,
             width: widget.size.width,
             child: Stack(
@@ -179,14 +184,13 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                 Container(
                   height: widget.size.height,
                   width: widget.size.width,
-                  decoration:
-                      const BoxDecoration(color: KColors.kNavBgDarkColor),
+                  decoration: const BoxDecoration(color: Colors.black),
                   child: Stack(
                     children: <Widget>[
                       Center(
                         child: AspectRatio(
                           //设置视频的大小 宽高比。长宽比表示为宽高比。例如，16:9宽高比的值为16.0/9.0
-                          aspectRatio: 9 / 16.0,
+                          aspectRatio: _videoController.value.aspectRatio,
                           //播放视频的组件
                           child: VideoPlayer(_videoController),
                         ),
@@ -218,7 +222,6 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                               size: widget.size,
                               name: widget.name,
                               caption: widget.caption,
-                              songName: widget.songName,
                             ),
                             RightPanel(
                               size: const Size(20, 400),
@@ -234,7 +237,8 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                   ),
                 )
               ],
-            )),
+            )
+        ),
       ),
     );
   }

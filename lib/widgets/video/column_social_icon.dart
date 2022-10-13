@@ -68,16 +68,16 @@ Widget getProfile(img) {
         ),
         Positioned(
             bottom: 3,
-            left: 18,
+            left: 15,
             child: Container(
               width: 20,
               height: 20,
               decoration:
-              const BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+              const BoxDecoration(shape: BoxShape.circle, color: Colors.red),
               child: const Center(
                   child: Icon(
                     Icons.add,
-                    color: Colors.black,
+                    color: Colors.white,
                     size: 15,
                   )),
             ))
