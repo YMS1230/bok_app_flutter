@@ -1,5 +1,6 @@
 import 'package:bok_app_flutter/routers/camera.dart';
 import 'package:bok_app_flutter/routers/home.dart';
+import 'package:bok_app_flutter/routers/login.dart';
 import 'package:bok_app_flutter/routers/message.dart';
 import 'package:bok_app_flutter/routers/mine.dart';
 import 'package:bok_app_flutter/routers/wallet.dart';
@@ -45,7 +46,11 @@ class _RootPageState extends State<RootPage> {
             currentIndex: _currentIndex,
             onTap: (int index) {
               setState(() {
-                _currentIndex = index;
+                if (index == 4) {
+                Navigator.pushNamed(context, 'LoginRouter');
+                } else {
+                  _currentIndex = index;
+                }
               });
             },
             items: [

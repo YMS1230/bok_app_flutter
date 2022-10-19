@@ -1,3 +1,4 @@
+import 'package:bok_app_flutter/routers/login.dart';
 import 'package:bok_app_flutter/routers/rootPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,13 +12,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemUiOverlayStyle style =
-    const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-    SystemChrome.setSystemUIOverlayStyle(style);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.light.copyWith(
+        statusBarColor: Colors.white,//这里替换你选择的颜色
+      ),
+    );
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
+      routes: {
+        "LoginRouter": (content) => const LoginRouter() // 跳转第 2 个页面的路由
+      },
       theme: ThemeData(
         primaryColor: Colors.red,
       ),

@@ -165,6 +165,8 @@ class KColors {
   static const Color wxTextBlueColor = Color(0xFF586D98);
 
   static const Color transparent = Colors.transparent;
+
+  static const Color loginBackColor = Color(0xFF22222d);
 }
 
 class Colours {
