@@ -1,12 +1,8 @@
-///  jh_color_utils.dart
-///
-///  Created by iotjin on 2020/03/25.
-///  description:  颜色工具类
 
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-class JhColorUtils {
+class ColorUtils {
   /// 十六进制颜色设置
   /// hex, 十六进制值，例如：0xffffff,
   /// alpha, 透明度 [0.0,1.0]

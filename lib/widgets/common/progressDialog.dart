@@ -23,7 +23,7 @@ class ProgressDialog extends Dialog {
           ),
           child: const CupertinoActivityIndicator(radius: 14.0),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           hintText,
           style: const TextStyle(color: Colors.white),

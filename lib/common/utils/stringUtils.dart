@@ -1,7 +1,3 @@
-///  jh_string_utils.dart
-///
-///  Created by iotjin on 2020/03/25.
-///  description:  字符串工具类
 
 extension StringExtension on String? {
   /// String 空安全处理

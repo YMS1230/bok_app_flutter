@@ -1,7 +1,3 @@
-///  jh_time_utils.dart
-///
-///  Created by iotjin on 2020/03/25.
-///  description:  时间工具类
 
 import 'package:date_format/date_format.dart';
 
@@ -12,7 +8,7 @@ const YMDHMSzh = [yyyy, '年', mm, '月', dd, '日 ', HH, ':', nn, ':', ss];
 
 const weekText = ['一', '二', '三', '四', '五', '六', '日'];
 
-class JhTimeUtils {
+class TimeUtils {
   /// 获取当前时间戳（默认13位）
   static int getTimeStamp({isMicroseconds = false}) {
     DateTime currentTime = DateTime.now();

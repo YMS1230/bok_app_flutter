@@ -1,10 +1,10 @@
-import 'package:bok_app_flutter/common/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:bok_app_flutter/common/screen.dart';
 import 'package:toast/toast.dart';
 import '../widgets/login/InputPasswordTextField.dart';
 import '../widgets/login/inputNumberTextField.dart';
 import '../widgets/login/loginHeader.dart';
+import 'package:bok_app_flutter/common/utils/colorUtils.dart';
 
 class LoginRouter extends StatefulWidget {
   const LoginRouter({Key? key}) : super(key: key);
@@ -21,7 +21,8 @@ class _LoginRouterState extends State<LoginRouter> {
         child: Container(
             width: Screen.screenWidth,
             height: Screen.screenHeight,
-            decoration: const BoxDecoration(color: KColors.loginBackColor),
+            decoration:
+                BoxDecoration(color: ColorUtils.hexAColor(0X000000, alpha: 1)),
             child: Stack(
               children: [
                 const LoginHeader(),
@@ -36,7 +37,7 @@ class _LoginRouterState extends State<LoginRouter> {
                           child: const InputNumberTextField(),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(top: 60),
+                          margin: const EdgeInsets.only(top: 30),
                           child: const InputPasswordTextField(),
                         ),
                         Container(
@@ -70,11 +71,13 @@ class _LoginRouterState extends State<LoginRouter> {
                           height: 34,
                           margin: const EdgeInsets.only(top: 0),
                           child: TextButton(
-                            onPressed: (){
+                            onPressed: () {
                               Toast.show("切换账号", gravity: Toast.center);
                             },
                             child: const InkWell(
-                              child: Text("Account Login",style: TextStyle(color: Color(0xff7A7A7A),fontSize: 12)),
+                              child: Text("Account Login",
+                                  style: TextStyle(
+                                      color: Color(0xff7A7A7A), fontSize: 12)),
                             ),
                           ),
                         )

@@ -1,11 +1,6 @@
-///  jh_monitor_network_utils.dart
-///
-///  Created by iotjin on 2020/07/02.
-///  description:  网络监测
-
-// ignore_for_file: body_might_complete_normally_nullable
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
 
 class JhMonitorNetworkUtils {
   /// 是否有网
@@ -30,8 +25,11 @@ class JhMonitorNetworkUtils {
 
   static String? monitorNetwork() {
     Connectivity().onConnectivityChanged.listen((event) {
-      print(event);
+      if (kDebugMode) {
+        print(event);
+      }
     });
+    return null;
   }
 
   /// 定义一个异步生成器

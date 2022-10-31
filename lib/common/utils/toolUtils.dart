@@ -1,11 +1,5 @@
-///  jh_common_utils.dart
-///
-///  Created by iotjin on 2020/03/25.
-///  description:  公共工具类
-
 import 'dart:math';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:bok_app_flutter/common/jh_common/widgets/jh_progress_hud.dart';
 
 class JhCommonUtils {
   /// 获取随机数
@@ -23,7 +17,7 @@ class JhCommonUtils {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
-      JhProgressHUD.showText('打开链接失败！');
+      // 打开链接失败
     }
   }
 
@@ -33,19 +27,19 @@ class JhCommonUtils {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
-      JhProgressHUD.showText('拨号失败！');
+      // 拨号失败
     }
   }
 
   /// 跳转AppStore
   static Future<void> jumpAppStore({String? url}) async {
     // 这是微信的地址，到时候换成自己的应用的地址
-    final _url = url ?? 'itms-apps://itunes.apple.com/cn/app/id414478124?mt=8';
-    final Uri uri = Uri.parse(_url);
+    final pushUrl = url ?? 'itms-apps://itunes.apple.com/cn/app/id414478124?mt=8';
+    final Uri uri = Uri.parse(pushUrl);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
-      JhProgressHUD.showText('跳转失败！');
+      // 跳转失败
     }
   }
 }

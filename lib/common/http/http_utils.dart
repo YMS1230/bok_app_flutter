@@ -4,7 +4,8 @@
 ///  description:  网络请求工具类（dio二次封装）
 
 import 'package:dio/dio.dart';
-import '/../common/jh_common/widgets/jh_progress_hud.dart';
+import 'package:bok_app_flutter/widgets/common/progressHud.dart';
+import 'package:flutter/foundation.dart';
 import 'apis.dart';
 import 'dio_utils.dart';
 import 'error_handle.dart';
@@ -72,10 +73,18 @@ class HttpUtils {
   }) {
     // 参数处理（如果需要加密等统一参数）
     if (!LogUtils.inProduction && isOpenLog) {
-      print('---------- HttpUtils URL ----------');
-      print(url);
-      print('---------- HttpUtils params ----------');
-      print(params);
+      if (kDebugMode) {
+        print('---------- HttpUtils URL ----------');
+      }
+      if (kDebugMode) {
+        print(url);
+      }
+      if (kDebugMode) {
+        print('---------- HttpUtils params ----------');
+      }
+      if (kDebugMode) {
+        print(params);
+      }
     }
 
     var data;
@@ -88,28 +97,32 @@ class HttpUtils {
     }
 
     if (loadingText != null && loadingText.isNotEmpty) {
-      JhProgressHUD.showLoadingText(loadingText);
+      ProgressHUD.showLoadingText(loadingText);
     }
     DioUtils.instance.request(method, url, data: data, queryParameters: queryParameters, onSuccess: (result) {
       if (!LogUtils.inProduction && isOpenLog) {
-        print('---------- HttpUtils response ----------');
-        print(result);
+        if (kDebugMode) {
+          print('---------- HttpUtils response ----------');
+        }
+        if (kDebugMode) {
+          print(result);
+        }
       }
       if (loadingText != null && loadingText.isNotEmpty) {
-        JhProgressHUD.hide();
+        ProgressHUD.hide();
       }
       if (result['code'] == ExceptionHandle.success) {
         success?.call(result);
       } else {
         // 其他状态，弹出错误提示信息
-        JhProgressHUD.showText(result['msg']);
+        ProgressHUD.showText(result['msg']);
         fail?.call(result['code'], result['msg']);
       }
     }, onError: (code, msg) {
       if (loadingText != null && loadingText.isNotEmpty) {
-        JhProgressHUD.hide();
+        ProgressHUD.hide();
       }
-      JhProgressHUD.showError(msg);
+      ProgressHUD.showError(msg);
       fail?.call(code, msg);
     });
   }

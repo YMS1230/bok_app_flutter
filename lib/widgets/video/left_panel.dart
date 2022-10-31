@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bok_app_flutter/common/colors.dart';
 
 class LeftPanel extends StatelessWidget {
   final String name;

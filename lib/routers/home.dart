@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:bok_app_flutter/common/colors.dart';
 import 'package:bok_app_flutter/widgets/video/column_social_icon.dart';
 import 'package:bok_app_flutter/widgets/video/left_panel.dart';
 import 'package:toast/toast.dart';
 import 'package:video_player/video_player.dart';
-
-import '../common/jh_common/widgets/progress_dialog.dart';
+import 'package:bok_app_flutter/widgets/common/progressDialog.dart';
+import 'package:bok_app_flutter/common/utils/colorUtils.dart';
 
 class HomeRouter extends StatefulWidget {
   const HomeRouter({super.key});
@@ -159,10 +158,9 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
         : Icon(
             Icons.play_arrow,
             size: 80,
-            color: KColors.kMaterialBgColor.withOpacity(0.5),
+            color: ColorUtils.hexAColor(0X000000,alpha: 0.5),
           );
   }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(

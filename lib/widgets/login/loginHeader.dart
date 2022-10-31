@@ -48,7 +48,8 @@ class LoginHeader extends StatelessWidget {
                   ))),
           Positioned(
               right: 27,
-              top: Screen.statusBarHeight + 30,
+              height: 40,
+              top: Screen.statusBarHeight + 25,
               child: TextButton(onPressed: () {
                 Navigator.of(context).pop();
               },

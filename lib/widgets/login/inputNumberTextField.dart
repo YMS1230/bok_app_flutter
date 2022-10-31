@@ -1,4 +1,3 @@
-
 import 'package:bok_app_flutter/common/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,7 @@ class InputNumberTextField extends StatelessWidget {
         children: [
           const Positioned(
             left: 0,
-            top: 4,
+            top: 8,
             child: Text(
               "+91",
               style: TextStyle(
@@ -26,15 +25,15 @@ class InputNumberTextField extends StatelessWidget {
           ),
           Positioned(
               left: 40,
-              top: 5,
+              top: 8,
               child: Container(
                 width: 3,
                 height: 14,
                 decoration: const BoxDecoration(color: Color(0xFF888888)),
               )),
-           const Positioned(
+          const Positioned(
               left: 70,
-              right: 142,
+              width: 140,
               height: 29,
               child: TextField(
                 decoration: InputDecoration(
@@ -47,6 +46,7 @@ class InputNumberTextField extends StatelessWidget {
                     color: Color(0xFF888888),
                   ),
                 ),
+                keyboardType: TextInputType.number,
                 maxLines: 1,
                 textAlign: TextAlign.left,
                 style: TextStyle(color: Colors.white),
@@ -58,7 +58,7 @@ class InputNumberTextField extends StatelessWidget {
           ),
           Positioned(
               right: 0,
-              top: 5,
+              top: 6,
               child: SizedBox(
                 height: 18,
                 child: InkWell(
