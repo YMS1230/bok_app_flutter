@@ -1,6 +1,5 @@
-import 'package:bok_app_flutter/common/screen.dart';
+import 'package:bok_app_flutter/common/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
-import 'package:toast/toast.dart';
 
 class LoginHeader extends StatelessWidget {
   const LoginHeader({Key? key}) : super(key: key);
@@ -8,13 +7,13 @@ class LoginHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  SizedBox(
-      width: Screen.screenWidth,
-      height: Screen.screenHeight,
+      width: ScreenUtils.screenWidth,
+      height: ScreenUtils.screenHeight,
       child: Stack(
         children: [
           Padding(
               padding: EdgeInsets.only(
-                  left: 0, top: Screen.statusBarHeight + 16),
+                  left: 0, top: ScreenUtils.statusBarHeight + 16),
               child: Image.asset(
                 "images/login/icon_login_small.png",
                 width: 64,
@@ -23,7 +22,7 @@ class LoginHeader extends StatelessWidget {
               )),
           Padding(
             padding: EdgeInsets.only(
-                left: 6, top: Screen.statusBarHeight + 20),
+                left: 6, top: ScreenUtils.statusBarHeight + 20),
             child: IconButton(
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -49,7 +48,7 @@ class LoginHeader extends StatelessWidget {
           Positioned(
               right: 27,
               height: 40,
-              top: Screen.statusBarHeight + 25,
+              top: ScreenUtils.statusBarHeight + 25,
               child: TextButton(onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -63,7 +62,7 @@ class LoginHeader extends StatelessWidget {
           ),
           Positioned(
               left: 28,
-              top: Screen.statusBarHeight + 188,
+              top: ScreenUtils.statusBarHeight + 188,
               child: const Text(
                 'Meet in BikBok',
                 style: TextStyle(

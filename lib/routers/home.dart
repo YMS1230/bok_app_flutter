@@ -158,7 +158,7 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
         : Icon(
             Icons.play_arrow,
             size: 80,
-            color: ColorUtils.hexAColor(0X000000,alpha: 0.5),
+            color: ColorUtils.hexAColor(0XFFFFFF,alpha: 0.5),
           );
   }
   @override

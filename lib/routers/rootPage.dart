@@ -1,6 +1,5 @@
 import 'package:bok_app_flutter/routers/camera.dart';
 import 'package:bok_app_flutter/routers/home.dart';
-import 'package:bok_app_flutter/routers/login.dart';
 import 'package:bok_app_flutter/routers/message.dart';
 import 'package:bok_app_flutter/routers/mine.dart';
 import 'package:bok_app_flutter/routers/wallet.dart';
@@ -8,8 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import 'dart:io';
-import '../common/customFloatingButton.dart';
-import '../common/screen.dart';
+import '../widgets/common/floatingButton.dart';
+import '../common/utils/screenUtils.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
@@ -99,7 +98,7 @@ class _RootPageState extends State<RootPage> {
         // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButtonLocation: FloatingButtonCustomLocation(
             FloatingActionButtonLocation.centerDocked,
-            offsetY: Platform.isIOS && Screen.bottomBarHeight > 0 ? 25 : 25,
+            offsetY: Platform.isIOS && ScreenUtils.bottomBarHeight > 0 ? 25 : 25,
             offsetX: 0),
         floatingActionButtonAnimator: ScalingCustomAnimation());
   }

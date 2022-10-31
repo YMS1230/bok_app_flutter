@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:bok_app_flutter/common/screen.dart';
+import 'package:bok_app_flutter/common/utils/screenUtils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import '../widgets/login/InputPasswordTextField.dart';
 import '../widgets/login/inputNumberTextField.dart';
 import '../widgets/login/loginHeader.dart';
 import 'package:bok_app_flutter/common/utils/colorUtils.dart';
+import 'package:bok_app_flutter/models/index.dart';
 
 class LoginRouter extends StatefulWidget {
   const LoginRouter({Key? key}) : super(key: key);
@@ -19,8 +21,8 @@ class _LoginRouterState extends State<LoginRouter> {
     return Material(
         color: Colors.white,
         child: Container(
-            width: Screen.screenWidth,
-            height: Screen.screenHeight,
+            width: ScreenUtils.screenWidth,
+            height: ScreenUtils.screenHeight,
             decoration:
                 BoxDecoration(color: ColorUtils.hexAColor(0X000000, alpha: 1)),
             child: Stack(
@@ -29,7 +31,7 @@ class _LoginRouterState extends State<LoginRouter> {
                 Positioned(
                     left: 28,
                     right: 28,
-                    top: Screen.statusBarHeight + 308,
+                    top: ScreenUtils.statusBarHeight + 308,
                     child: Column(
                       children: [
                         Container(
@@ -48,7 +50,7 @@ class _LoginRouterState extends State<LoginRouter> {
                               style: TextStyle(color: Color(0xff4B4B4B))),
                         ),
                         Container(
-                            width: Screen.screenWidth - 56,
+                            width: ScreenUtils.screenWidth - 56,
                             margin: const EdgeInsets.only(top: 45),
                             child: InkWell(
                               child: Stack(
@@ -63,8 +65,14 @@ class _LoginRouterState extends State<LoginRouter> {
                                           fontSize: 18)),
                                 ],
                               ),
-                              onTap: () {
-                                Toast.show("登录", gravity: Toast.center);
+                              onTap: () async {
+                                User u = User.fromJson(
+                                    {"name": "Yang", "age": 18,"sex":"男","avatar":"images/login/icon_login.png"});
+                                String showText = u.name;
+                                Toast.show('登录成功，姓名是${u.name}', gravity: Toast.center);
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                                // prefs.setString('',"小明");
                               },
                             )),
                         Container(

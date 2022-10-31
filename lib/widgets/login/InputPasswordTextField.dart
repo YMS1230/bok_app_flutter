@@ -1,4 +1,4 @@
-import 'package:bok_app_flutter/common/screen.dart';
+import 'package:bok_app_flutter/common/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
 
 class InputPasswordTextField extends StatelessWidget {
@@ -8,7 +8,7 @@ class InputPasswordTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 40,
-      width: Screen.screenWidth - 56,
+      width: ScreenUtils.screenWidth - 56,
       // decoration: const BoxDecoration(color: Colors.red),
       child: Stack(
         children: [

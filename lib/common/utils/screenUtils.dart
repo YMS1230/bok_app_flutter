@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-import '../main.dart';
+import '../../main.dart';
 
-class Screen {
+class ScreenUtils {
   static MediaQueryData mq =
       MediaQuery.of(navigatorKey.currentState!.overlay!.context);
   // 屏幕宽(注意是dp, 转换px 需要 screenWidth * pixelRatio)
