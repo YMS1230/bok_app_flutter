@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:bok_app_flutter/routers/camera.dart';
 import 'package:bok_app_flutter/routers/home.dart';
 import 'package:bok_app_flutter/routers/message.dart';
@@ -5,6 +7,7 @@ import 'package:bok_app_flutter/routers/mine.dart';
 import 'package:bok_app_flutter/routers/wallet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'dart:io';
 import '../widgets/common/floatingButton.dart';
@@ -44,13 +47,19 @@ class _RootPageState extends State<RootPage> {
             activeColor: Colors.white,
             currentIndex: _currentIndex,
             onTap: (int index) {
-              setState(() {
-                if (index == 4) {
-                Navigator.pushNamed(context, 'LoginRouter');
-                } else {
-                  _currentIndex = index;
-                }
-              });
+              // setState(() async {
+              //   if (index == 4) {
+              //     SharedPreferences prefs =
+              //         await SharedPreferences.getInstance();
+              //     String? name = prefs.getString("name");
+              //     if (name == null) {
+              //       Navigator.pushNamed(context, 'LoginRouter');
+              //     }
+              //   } else {
+              //     _currentIndex = index;
+              //   }
+              // });
+              _currentIndex = index;
             },
             items: [
               BottomNavigationBarItem(
@@ -98,7 +107,8 @@ class _RootPageState extends State<RootPage> {
         // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButtonLocation: FloatingButtonCustomLocation(
             FloatingActionButtonLocation.centerDocked,
-            offsetY: Platform.isIOS && ScreenUtils.bottomBarHeight > 0 ? 25 : 25,
+            offsetY:
+                Platform.isIOS && ScreenUtils.bottomBarHeight > 0 ? 25 : 25,
             offsetX: 0),
         floatingActionButtonAnimator: ScalingCustomAnimation());
   }

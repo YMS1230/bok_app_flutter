@@ -66,13 +66,17 @@ class _LoginRouterState extends State<LoginRouter> {
                                 ],
                               ),
                               onTap: () async {
-                                User u = User.fromJson(
-                                    {"name": "Yang", "age": 18,"sex":"男","avatar":"images/login/icon_login.png"});
-                                String showText = u.name;
-                                Toast.show('登录成功，姓名是${u.name}', gravity: Toast.center);
-                                SharedPreferences prefs = await SharedPreferences.getInstance();
-
-                                // prefs.setString('',"小明");
+                                User u = User.fromJson({
+                                  "name": "Yang",
+                                  "age": 18,
+                                  "sex": "男",
+                                  "avatar": "images/login/icon_login.png"
+                                });
+                                Toast.show('登录成功，姓名是${u.name}',
+                                    gravity: Toast.center);
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.setString('name', u.name);
                               },
                             )),
                         Container(
